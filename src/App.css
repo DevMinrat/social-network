@@ -14,29 +14,8 @@
   grid-gap: 10px;
 }
 
-.header {
-  grid-area: header;
-
-  background-color: tomato;
-}
-
-.aside {
-  grid-area: aside;
-
-  background-color: wheat;
-}
-
 .content {
   grid-area: content;
 
   background-color: palegoldenrod;
-}
-
-.profile__img {
-  width: 100%;
-  max-width: 1300px;
-  height: 200px;
-
-  object-fit: cover;
-  
 }

@@ -1,0 +1,12 @@
+.aside {
+  grid-area: aside;
+
+  padding: 30px;
+
+  background-color: wheat;
+}
+
+.asideNav {
+  display: flex;
+  flex-direction: column;
+}
