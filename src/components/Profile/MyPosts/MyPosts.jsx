@@ -1,7 +1,6 @@
 import s from "./MyPosts.module.css";
-import Post from "./Posts/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
   return (
     <div>
       All posts
@@ -9,8 +8,7 @@ const MyPosts = () => {
         <textarea></textarea>
         <button>Add Post</button>
       </div>
-      <Post message="Hiiii" />
-      <Post message="Hellowww" />
+      {props.posts}
     </div>
   );
 };
