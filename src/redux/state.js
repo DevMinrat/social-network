@@ -24,8 +24,11 @@ const state = {
       { id: 4, message: "How a you" },
       { id: 5, message: "Yes" },
     ],
+    newMessageValue: "",
   },
 };
+
+window.state = state;
 
 export const updateNewPostValue = (newText) => {
   state.profilePage.newPostValue = newText;
@@ -39,6 +42,21 @@ export const addPost = () => {
   };
   state.profilePage.posts.push(newPost);
   state.profilePage.newPostValue = "";
+  rerenderEntireTree(state);
+};
+
+export const updateNewMessageValue = (newText) => {
+  state.dialogsPage.newMessageValue = newText;
+  rerenderEntireTree(state);
+};
+
+export const addMessage = () => {
+  let newMessage = {
+    id: 6,
+    message: state.dialogsPage.newMessageValue,
+  };
+  state.dialogsPage.messages.push(newMessage);
+  state.dialogsPage.newMessageValue = "";
   rerenderEntireTree(state);
 };
 

@@ -17,8 +17,9 @@ function App(props) {
             path="/dialogs"
             render={() => (
               <Dialogs
-                dialogs={props.state.dialogsPage.dialogs}
-                messages={props.state.dialogsPage.messages}
+                dialogsPage={props.state.dialogsPage}
+                addMessage={props.addMessage}
+                updateNewMessageValue={props.updateNewMessageValue}
               />
             )}
           />

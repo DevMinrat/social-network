@@ -5,19 +5,23 @@ import DialogItem from "./DialogItem/DialogItem";
 import React from "react";
 
 const Dialogs = (props) => {
-  let dialogsElements = props.dialogs.map((dialog) => (
+  let dialogsElements = props.dialogsPage.dialogs.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} />
   ));
 
-  let messagesElements = props.messages.map((message) => (
+  let messagesElements = props.dialogsPage.messages.map((message) => (
     <Message message={message.message} />
   ));
 
   let newDialogMessage = React.createRef();
 
-  let sendMessage = () => {
+  let addMessage = () => {
+    props.addMessage();
+  };
+
+  let updateNewMessageValue = () => {
     let text = newDialogMessage.current.value;
-    alert(text);
+    props.updateNewMessageValue(text);
   };
 
   return (
@@ -27,8 +31,14 @@ const Dialogs = (props) => {
 
         <div>
           <div className={s.messagess}>{messagesElements}</div>
-          <textarea ref={newDialogMessage}></textarea>
-          <button onClick={sendMessage}>Send Message</button>
+          <div>
+            <textarea
+              ref={newDialogMessage}
+              value={props.dialogsPage.newMessageValue}
+              onChange={updateNewMessageValue}
+            />
+            <button onClick={addMessage}>Send Message</button>
+          </div>
         </div>
       </div>
     </BrowserRouter>

@@ -3,7 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import state, { updateNewPostValue, addPost, subscribe } from "./redux/state";
+import state, {
+  updateNewPostValue,
+  addPost,
+  subscribe,
+  addMessage,
+  updateNewMessageValue,
+} from "./redux/state";
 
 let rerenderEntireTree = (state) => {
   ReactDOM.render(
@@ -12,11 +18,14 @@ let rerenderEntireTree = (state) => {
         state={state}
         addPost={addPost}
         updateNewPostValue={updateNewPostValue}
+        addMessage={addMessage}
+        updateNewMessageValue={updateNewMessageValue}
       />
     </React.StrictMode>,
     document.getElementById("root")
   );
 };
+
 rerenderEntireTree(state);
 
 subscribe(rerenderEntireTree);
