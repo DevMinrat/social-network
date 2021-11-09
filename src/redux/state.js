@@ -1,3 +1,8 @@
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_VALUE = "UPDATE-NEW-POST-VALUE";
+const ADD_MESSAGE = "ADD-MESSAGE";
+const UPDATE_NEW_MESSAGE_VALUE = "UPDATE-NEW-MESSAGE-VALUE";
+
 let store = {
   _state: {
     profilePage: {
@@ -26,48 +31,53 @@ let store = {
       newMessageValue: "",
     },
   },
+  _callSubscriber() {},
 
   getState() {
     return this._state;
   },
-
-  updateNewPostValue(newText) {
-    this._state.profilePage.newPostValue = newText;
-    this._callSubscriber(this._state);
-  },
-
-  addPost() {
-    debugger;
-    let newPost = {
-      id: 5,
-      message: this._state.profilePage.newPostValue,
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostValue = "";
-    this._callSubscriber(this._state);
-  },
-
-  updateNewMessageValue(newText) {
-    this._state.dialogsPage.newMessageValue = newText;
-    this._callSubscriber(this._state);
-  },
-
-  addMessage() {
-    let newMessage = {
-      id: 6,
-      message: this._state.dialogsPage.newMessageValue,
-    };
-    this._state.dialogsPage.messages.push(newMessage);
-    this._state.dialogsPage.newMessageValue = "";
-    this._callSubscriber(this._state);
-  },
-
   subscribe(observer) {
     this._callSubscriber = observer;
   },
 
-  _callSubscriber() {},
+  dispatch(action) {
+    if (action.type === ADD_POST) {
+      let newPost = {
+        id: 5,
+        message: this._state.profilePage.newPostValue,
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostValue = "";
+      this._callSubscriber(this._state);
+    } else if (action.type === UPDATE_NEW_POST_VALUE) {
+      this._state.profilePage.newPostValue = action.newText;
+      this._callSubscriber(this._state);
+    } else if (action.type === ADD_MESSAGE) {
+      let newMessage = {
+        id: 6,
+        message: this._state.dialogsPage.newMessageValue,
+      };
+      this._state.dialogsPage.messages.push(newMessage);
+      this._state.dialogsPage.newMessageValue = "";
+      this._callSubscriber(this._state);
+    } else if (action.type === UPDATE_NEW_MESSAGE_VALUE) {
+      this._state.dialogsPage.newMessageValue = action.newText;
+      this._callSubscriber(this._state);
+    }
+  },
 };
+
+export const addPostActionCreater = () => ({ type: ADD_POST });
+export const updateNewPostValueActionCreator = (text) => ({
+  type: UPDATE_NEW_POST_VALUE,
+  newText: text,
+});
+
+export const addMessageActionCreater = () => ({ type: ADD_MESSAGE });
+export const updateNewMessageValueActionCreator = (text) => ({
+  type: UPDATE_NEW_MESSAGE_VALUE,
+  newText: text,
+});
 
 window.store = store;
 
