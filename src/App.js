@@ -1,9 +1,9 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import Header from "./components/Header/Header";
 import Aside from "./components/Aside/Aside";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import { Route } from "react-router-dom";
 
 function App(props) {
@@ -14,22 +14,9 @@ function App(props) {
       <div className="content">
         <Route
           path="/dialogs"
-          render={() => (
-            <Dialogs
-              dispatch={props.dispatch}
-              dialogsPage={props.state.dialogsPage}
-            />
-          )}
+          render={() => <DialogsContainer store={props.store} />}
         />
-        <Route
-          path="/profile"
-          render={() => (
-            <Profile
-              dispatch={props.dispatch}
-              profilePage={props.state.profilePage}
-            />
-          )}
-        />
+        <Route path="/profile" render={() => <Profile store={props.store} />} />
       </div>
     </div>
   );

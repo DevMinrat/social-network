@@ -1,52 +1,44 @@
-import { BrowserRouter, NavLink } from "react-router-dom";
+import React from "react";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import React from "react";
-import {
-  addMessageActionCreater,
-  updateNewMessageValueActionCreator,
-} from "../../redux/dialogsReducer";
 
 const Dialogs = (props) => {
-  let dialogsElements = props.dialogsPage.dialogs.map((dialog) => (
+  let dialogsElements = props.dialogs.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} />
   ));
 
-  let messagesElements = props.dialogsPage.messages.map((message) => (
+  let messagesElements = props.messages.map((message) => (
     <Message message={message.message} />
   ));
 
   let newDialogMessage = React.createRef();
 
-  let addMessage = () => {
-    props.dispatch(addMessageActionCreater());
+  let onAddMessage = () => {
+    props.addMessage();
   };
 
-  let updateNewMessageValue = () => {
+  let onMessageChange = () => {
     let text = newDialogMessage.current.value;
-    let action = updateNewMessageValueActionCreator(text);
-    props.dispatch(action);
+    props.updateNewMessageValue(text);
   };
 
   return (
-    <BrowserRouter>
-      <div className={s.dialogs}>
-        <div className={s.dialogsItems}>{dialogsElements}</div>
+    <div className={s.dialogs}>
+      <div className={s.dialogsItems}>{dialogsElements}</div>
 
+      <div>
+        <div className={s.messagess}>{messagesElements}</div>
         <div>
-          <div className={s.messagess}>{messagesElements}</div>
-          <div>
-            <textarea
-              ref={newDialogMessage}
-              value={props.dialogsPage.newMessageValue}
-              onChange={updateNewMessageValue}
-            />
-            <button onClick={addMessage}>Send Message</button>
-          </div>
+          <textarea
+            ref={newDialogMessage}
+            value={props.newMessageValue}
+            onChange={onMessageChange}
+          />
+          <button onClick={onAddMessage}>Send Message</button>
         </div>
       </div>
-    </BrowserRouter>
+    </div>
   );
 };
 
