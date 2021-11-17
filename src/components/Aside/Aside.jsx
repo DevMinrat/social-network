@@ -7,6 +7,7 @@ const Aside = () => {
       <nav className={s.asideNav}>
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/dialogs">Messages</NavLink>
+        <NavLink to="/users">Users</NavLink>
         <NavLink to="#">News</NavLink>
         <NavLink to="#">Music</NavLink>
         <NavLink to="#">Settings</NavLink>
