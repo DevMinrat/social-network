@@ -7,7 +7,7 @@ const UserItem = (props) => {
       <div>Name: {props.name}</div>
       <div>Status: {props.status}</div>
       <div>
-        Location: {props.location.country}, {props.location.city}
+        Location: {"props.location.country"}, {"props.location.city"}
       </div>
       <div>
         {props.followed ? (

@@ -1,44 +1,22 @@
+import * as axios from "axios";
 import React from "react";
 import UserItem from "./UserItem/UserItem";
+import UserAva from "../../assets/images/avatar.gif";
 
 let Users = (props) => {
   if (props.users.length === 0) {
-    props.setUsers([
-      {
-        id: 1,
-        avatar:
-          "http://www.animacity.ru/sites/default/files/imagecache/photo-big/users/5292/photo/2013/304/110.gif",
-        name: "Max",
-        status: "Max descr",
-        location: { country: "Belarus", city: "Gomel" },
-        followed: false,
-      },
-      {
-        id: 2,
-        avatar:
-          "http://www.animacity.ru/sites/default/files/imagecache/photo-big/users/5292/photo/2013/304/110.gif",
-        name: "Masha",
-        status: "Masha descr",
-        location: { country: "Belarus", city: "Minsk" },
-        followed: false,
-      },
-      {
-        id: 3,
-        avatar:
-          "http://www.animacity.ru/sites/default/files/imagecache/photo-big/users/5292/photo/2013/304/110.gif",
-        name: "Igor",
-        status: "Igor status",
-        location: { country: "Belarus", city: "Brest" },
-        followed: true,
-      },
-    ]);
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => {
+        props.setUsers(response.data.items);
+      });
   }
 
   let userItems = props.users.map((u) => {
     return (
       <UserItem
         id={u.id}
-        avatar={u.avatar}
+        avatar={u.photos.small ?? UserAva}
         name={u.name}
         status={u.status}
         location={u.location}
